@@ -1,0 +1,954 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bayzu444 Download Center</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #0a0a2a, #1a1a4a, #2d2d5a);
+            color: #fff;
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Efek bintang untuk tema galaxy */
+        .stars {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+
+        .star {
+            position: absolute;
+            background-color: #fff;
+            border-radius: 50%;
+            animation: twinkle 5s infinite;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.2; }
+            50% { opacity: 1; }
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            text-align: center;
+            padding: 30px 0;
+            position: relative;
+        }
+
+        .logo {
+            font-size: 3rem;
+            margin-bottom: 10px;
+            color: #6e45e2;
+            text-shadow: 0 0 15px rgba(110, 69, 226, 0.7);
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            background: linear-gradient(90deg, #6e45e2, #88d3ce);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Auth Container */
+        .auth-container {
+            display: flex;
+            justify-content: center;
+            margin: 30px 0;
+        }
+
+        .auth-box {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 30px;
+            border-radius: 15px;
+            width: 100%;
+            max-width: 500px;
+            border: 1px solid rgba(110, 69, 226, 0.3);
+            box-shadow: 0 0 20px rgba(110, 69, 226, 0.3);
+        }
+
+        .auth-tabs {
+            display: flex;
+            margin-bottom: 20px;
+            border-bottom: 1px solid rgba(110, 69, 226, 0.3);
+        }
+
+        .auth-tab {
+            padding: 10px 20px;
+            cursor: pointer;
+            opacity: 0.7;
+            transition: all 0.3s ease;
+        }
+
+        .auth-tab.active {
+            opacity: 1;
+            border-bottom: 2px solid #6e45e2;
+        }
+
+        .auth-form {
+            display: none;
+        }
+
+        .auth-form.active {
+            display: block;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            text-align: left;
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            margin-bottom: 8px;
+            color: #88d3ce;
+        }
+
+        .form-input {
+            padding: 12px 15px;
+            border-radius: 8px;
+            border: 1px solid #6e45e2;
+            background: rgba(255, 255, 255, 0.1);
+            color: #fff;
+            outline: none;
+        }
+
+        .form-input:focus {
+            border-color: #88d3ce;
+            box-shadow: 0 0 10px rgba(136, 211, 206, 0.5);
+        }
+
+        .auth-button {
+            padding: 12px;
+            background: linear-gradient(90deg, #6e45e2, #88d3ce);
+            border: none;
+            border-radius: 8px;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+            margin-top: 10px;
+        }
+
+        .auth-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(110, 69, 226, 0.4);
+        }
+
+        .user-info {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .user-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #6e45e2, #88d3ce);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+
+        .logout-button {
+            padding: 8px 15px;
+            background: rgba(220, 53, 69, 0.7);
+            border: none;
+            border-radius: 5px;
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .logout-button:hover {
+            background: rgba(220, 53, 69, 1);
+        }
+
+        .search-container {
+            display: flex;
+            justify-content: center;
+            margin: 30px 0;
+        }
+
+        .search-box {
+            display: flex;
+            width: 100%;
+            max-width: 600px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50px;
+            overflow: hidden;
+            border: 2px solid #6e45e2;
+            box-shadow: 0 0 15px rgba(110, 69, 226, 0.5);
+        }
+
+        .search-input {
+            flex: 1;
+            padding: 15px 20px;
+            background: transparent;
+            border: none;
+            color: #fff;
+            font-size: 1rem;
+            outline: none;
+        }
+
+        .search-button {
+            padding: 15px 25px;
+            background: #6e45e2;
+            border: none;
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .search-button:hover {
+            background: #88d3ce;
+        }
+
+        .upload-container {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 30px;
+            border-radius: 15px;
+            margin: 30px 0;
+            text-align: center;
+            border: 1px solid rgba(110, 69, 226, 0.3);
+            box-shadow: 0 0 20px rgba(110, 69, 226, 0.3);
+        }
+
+        .upload-title {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            color: #88d3ce;
+        }
+
+        .upload-form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .upload-button {
+            padding: 12px;
+            background: linear-gradient(90deg, #6e45e2, #88d3ce);
+            border: none;
+            border-radius: 8px;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 10px;
+        }
+
+        .upload-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(110, 69, 226, 0.4);
+        }
+
+        .downloads-container {
+            margin: 40px 0;
+        }
+
+        .section-title {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            color: #88d3ce;
+            text-align: center;
+        }
+
+        .download-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .download-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid rgba(110, 69, 226, 0.3);
+        }
+
+        .download-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(110, 69, 226, 0.3);
+        }
+
+        .card-img {
+            width: 100%;
+            height: 160px;
+            background: linear-gradient(135deg, #6e45e2, #88d3ce);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+        }
+
+        .card-content {
+            padding: 20px;
+        }
+
+        .card-title {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            color: #fff;
+        }
+
+        .card-desc {
+            font-size: 0.9rem;
+            color: #ccc;
+            margin-bottom: 15px;
+        }
+
+        .download-button {
+            display: block;
+            text-align: center;
+            padding: 10px;
+            background: #6e45e2;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: background 0.3s ease;
+        }
+
+        .download-button:hover {
+            background: #88d3ce;
+        }
+
+        footer {
+            text-align: center;
+            padding: 30px 0;
+            margin-top: 50px;
+            border-top: 1px solid rgba(110, 69, 226, 0.3);
+            color: #88d3ce;
+        }
+
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 15px 20px;
+            border-radius: 8px;
+            background: rgba(110, 69, 226, 0.9);
+            color: white;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            transform: translateX(100%);
+            transition: transform 0.3s ease;
+            z-index: 1000;
+        }
+
+        .notification.show {
+            transform: translateX(0);
+        }
+
+        .notification.error {
+            background: rgba(220, 53, 69, 0.9);
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        @media (max-width: 768px) {
+            .download-grid {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .logo {
+                font-size: 2.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Efek bintang -->
+    <div class="stars" id="stars"></div>
+
+    <!-- Notifikasi -->
+    <div class="notification" id="notification"></div>
+
+    <div class="container">
+        <header>
+            <div class="logo">
+                <i class="fas fa-galaxy"></i>
+            </div>
+            <h1>bayzu444 Download Center</h1>
+            <p>Temukan dan download berbagai file dan aplikasi dengan mudah</p>
+        </header>
+
+        <!-- Area Autentikasi -->
+        <div class="auth-container" id="authContainer">
+            <div class="auth-box">
+                <div class="auth-tabs">
+                    <div class="auth-tab active" data-tab="login">Login</div>
+                    <div class="auth-tab" data-tab="register">Registrasi</div>
+                </div>
+                
+                <form class="auth-form active" id="loginForm">
+                    <div class="form-group">
+                        <label for="loginEmail">Email</label>
+                        <input type="email" id="loginEmail" class="form-input" placeholder="Masukkan email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="loginPassword">Password</label>
+                        <input type="password" id="loginPassword" class="form-input" placeholder="Masukkan password" required>
+                    </div>
+                    <button type="submit" class="auth-button">Login</button>
+                </form>
+                
+                <form class="auth-form" id="registerForm">
+                    <div class="form-group">
+                        <label for="firstName">Nama Depan</label>
+                        <input type="text" id="firstName" class="form-input" placeholder="Masukkan nama depan" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="lastName">Nama Belakang</label>
+                        <input type="text" id="lastName" class="form-input" placeholder="Masukkan nama belakang" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="registerEmail">Email</label>
+                        <input type="email" id="registerEmail" class="form-input" placeholder="Masukkan email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="phoneNumber">Nomor Telepon</label>
+                        <input type="tel" id="phoneNumber" class="form-input" placeholder="Masukkan nomor telepon" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="registerPassword">Password</label>
+                        <input type="password" id="registerPassword" class="form-input" placeholder="Buat password" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="confirmPassword">Konfirmasi Password</label>
+                        <input type="password" id="confirmPassword" class="form-input" placeholder="Konfirmasi password" required>
+                    </div>
+                    <button type="submit" class="auth-button">Daftar</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Info Pengguna setelah login -->
+        <div class="user-info hidden" id="userInfo">
+            <div class="user-avatar">
+                <i class="fas fa-user"></i>
+            </div>
+            <div>
+                <h3 id="userName">Nama Pengguna</h3>
+                <p id="userEmail">email@example.com</p>
+            </div>
+            <button class="logout-button" id="logoutButton">Logout</button>
+        </div>
+
+        <!-- Konten setelah login -->
+        <div class="hidden" id="mainContent">
+            <div class="search-container">
+                <div class="search-box">
+                    <input type="text" class="search-input" id="searchInput" placeholder="Cari file atau APK...">
+                    <button class="search-button" id="searchButton">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </div>
+            </div>
+
+            <div class="upload-container">
+                <h2 class="upload-title">Upload File/APK</h2>
+                <form class="upload-form" id="uploadForm">
+                    <div class="form-group">
+                        <label for="fileName">Nama File</label>
+                        <input type="text" id="fileName" class="form-input" placeholder="Masukkan nama file" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="fileDesc">Deskripsi File</label>
+                        <textarea id="fileDesc" class="form-input" rows="3" placeholder="Deskripsi singkat tentang file" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="fileCategory">Kategori</label>
+                        <select id="fileCategory" class="form-input" required>
+                            <option value="">Pilih Kategori</option>
+                            <option value="APK">APK</option>
+                            <option value="Document">Dokumen</option>
+                            <option value="Image">Gambar</option>
+                            <option value="Video">Video</option>
+                            <option value="Music">Musik</option>
+                            <option value="Other">Lainnya</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="fileUpload">Unggah File</label>
+                        <input type="file" id="fileUpload" class="form-input" required>
+                    </div>
+                    <button type="submit" class="upload-button">Upload File</button>
+                </form>
+            </div>
+
+            <div class="downloads-container">
+                <h2 class="section-title">File yang Tersedia</h2>
+                <div class="download-grid" id="downloadGrid">
+                    <!-- Item download akan diisi melalui JavaScript -->
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <p>&copy; 2023 Bayzu444 ada kendala lapor admin.</p>
+        </footer>
+    </div>
+
+    <script>
+        // Fungsi untuk membuat efek bintang
+        function createStars() {
+            const starsContainer = document.getElementById('stars');
+            const starsCount = 150;
+            
+            for (let i = 0; i < starsCount; i++) {
+                const star = document.createElement('div');
+                star.classList.add('star');
+                
+                // Posisi acak
+                const posX = Math.random() * 100;
+                const posY = Math.random() * 100;
+                
+                // Ukuran acak
+                const size = Math.random() * 3;
+                
+                // Durasi animasi acak
+                const duration = Math.random() * 5 + 3;
+                
+                star.style.left = `${posX}%`;
+                star.style.top = `${posY}%`;
+                star.style.width = `${size}px`;
+                star.style.height = `${size}px`;
+                star.style.animationDuration = `${duration}s`;
+                star.style.animationDelay = `${Math.random() * 5}s`;
+                
+                starsContainer.appendChild(star);
+            }
+        }
+
+        // Fungsi untuk menampilkan notifikasi
+        function showNotification(message, isSuccess = true) {
+            const notification = document.getElementById('notification');
+            notification.textContent = message;
+            
+            if (isSuccess) {
+                notification.style.background = 'rgba(110, 69, 226, 0.9)';
+                notification.classList.remove('error');
+            } else {
+                notification.style.background = 'rgba(220, 53, 69, 0.9)';
+                notification.classList.add('error');
+            }
+            
+            notification.classList.add('show');
+            
+            setTimeout(() => {
+                notification.classList.remove('show');
+            }, 3000);
+        }
+
+        // Fungsi untuk mendapatkan icon berdasarkan kategori
+        function getIconForCategory(category) {
+            switch(category) {
+                case 'APK': return 'fas fa-mobile-alt';
+                case 'Document': return 'fas fa-file-pdf';
+                case 'Image': return 'fas fa-image';
+                case 'Video': return 'fas fa-video';
+                case 'Music': return 'fas fa-music';
+                default: return 'fas fa-file';
+            }
+        }
+
+        // Fungsi untuk mendapatkan file items dari localStorage
+        function getFileItems() {
+            const items = localStorage.getItem('fileItems');
+            return items ? JSON.parse(items) : [];
+        }
+
+        // Fungsi untuk menyimpan file items ke localStorage
+        function saveFileItems(items) {
+            localStorage.setItem('fileItems', JSON.stringify(items));
+        }
+
+        // Fungsi untuk mendapatkan users dari localStorage
+        function getUsers() {
+            const users = localStorage.getItem('users');
+            return users ? JSON.parse(users) : [];
+        }
+
+        // Fungsi untuk menyimpan users ke localStorage
+        function saveUsers(users) {
+            localStorage.setItem('users', JSON.stringify(users));
+        }
+
+        // Fungsi untuk menampilkan item download
+        function renderDownloadItems(items) {
+            const grid = document.getElementById('downloadGrid');
+            grid.innerHTML = '';
+            
+            if (items.length === 0) {
+                grid.innerHTML = '<p style="grid-column: 1 / -1; text-align: center; padding: 30px;">Tidak ada file yang ditemukan</p>';
+                return;
+            }
+            
+            items.forEach(item => {
+                const card = document.createElement('div');
+                card.classList.add('download-card');
+                card.dataset.id = item.id;
+                
+                card.innerHTML = `
+                    <div class="card-img">
+                        <i class="${getIconForCategory(item.category)}"></i>
+                    </div>
+                    <div class="card-content">
+                        <h3 class="card-title">${item.name}</h3>
+                        <p class="card-desc">${item.description}</p>
+                        <p class="card-desc"><small>Kategori: ${item.category} | Ukuran: ${item.size} | Diupload oleh: ${item.uploader}</small></p>
+                        <a href="${item.url}" download="${item.name}" class="download-button">
+                            <i class="fas fa-download"></i> Download
+                        </a>
+                    </div>
+                `;
+                
+                grid.appendChild(card);
+            });
+        }
+
+        // Fungsi untuk menambahkan file baru
+        function addNewFile(fileData) {
+            const items = getFileItems();
+            // Generate ID unik
+            fileData.id = Date.now();
+            
+            // Tambahkan informasi uploader
+            const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+            fileData.uploader = `${currentUser.firstName} ${currentUser.lastName}`;
+            
+            items.push(fileData);
+            saveFileItems(items);
+            renderDownloadItems(items);
+            showNotification('File berhasil diupload!');
+        }
+
+        // Fungsi untuk mencari item
+        function setupSearch() {
+            const searchInput = document.getElementById('searchInput');
+            const searchButton = document.getElementById('searchButton');
+            
+            const performSearch = () => {
+                const searchTerm = searchInput.value.toLowerCase();
+                const items = getFileItems();
+                
+                if (searchTerm.trim() === '') {
+                    renderDownloadItems(items);
+                    return;
+                }
+                
+                const filteredItems = items.filter(item => 
+                    item.name.toLowerCase().includes(searchTerm) || 
+                    item.description.toLowerCase().includes(searchTerm) ||
+                    item.category.toLowerCase().includes(searchTerm)
+                );
+                
+                renderDownloadItems(filteredItems);
+            };
+            
+            searchButton.addEventListener('click', performSearch);
+            searchInput.addEventListener('keyup', (e) => {
+                if (e.key === 'Enter') {
+                    performSearch();
+                }
+            });
+        }
+
+        // Fungsi untuk menangani form upload
+        function setupUploadForm() {
+            const form = document.getElementById('uploadForm');
+            const fileInput = document.getElementById('fileUpload');
+            
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const fileName = document.getElementById('fileName').value;
+                const fileDesc = document.getElementById('fileDesc').value;
+                const fileCategory = document.getElementById('fileCategory').value;
+                const file = fileInput.files[0];
+                
+                if (!file) {
+                    showNotification('Pilih file terlebih dahulu!', false);
+                    return;
+                }
+                
+                // Validasi ukuran file (maksimal 10MB)
+                const maxSize = 10 * 1024 * 1024; // 10MB
+                if (file.size > maxSize) {
+                    showNotification('Ukuran file terlalu besar. Maksimal 10MB', false);
+                    return;
+                }
+                
+                // Membaca file sebagai URL
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const fileData = {
+                        name: fileName,
+                        description: fileDesc,
+                        category: fileCategory,
+                        size: formatFileSize(file.size),
+                        url: e.target.result,
+                        uploadDate: new Date().toLocaleDateString('id-ID')
+                    };
+                    
+                    addNewFile(fileData);
+                    form.reset();
+                };
+                
+                reader.onerror = function() {
+                    showNotification('Gagal membaca file!', false);
+                };
+                
+                reader.readAsDataURL(file);
+            });
+        }
+
+        // Fungsi untuk memformat ukuran file
+        function formatFileSize(bytes) {
+            if (bytes === 0) return '0 Bytes';
+            const k = 1024;
+            const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+            const i = Math.floor(Math.log(bytes) / Math.log(k));
+            return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+        }
+
+        // Fungsi untuk mengatur tab autentikasi
+        function setupAuthTabs() {
+            const tabs = document.querySelectorAll('.auth-tab');
+            const forms = document.querySelectorAll('.auth-form');
+            
+            tabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    const tabName = tab.getAttribute('data-tab');
+                    
+                    // Aktifkan tab yang diklik
+                    tabs.forEach(t => t.classList.remove('active'));
+                    tab.classList.add('active');
+                    
+                    // Tampilkan form yang sesuai
+                    forms.forEach(form => {
+                        if (form.id === `${tabName}Form`) {
+                            form.classList.add('active');
+                        } else {
+                            form.classList.remove('active');
+                        }
+                    });
+                });
+            });
+        }
+
+        // Fungsi untuk menangani registrasi
+        function setupRegisterForm() {
+            const form = document.getElementById('registerForm');
+            
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const firstName = document.getElementById('firstName').value;
+                const lastName = document.getElementById('lastName').value;
+                const email = document.getElementById('registerEmail').value;
+                const phone = document.getElementById('phoneNumber').value;
+                const password = document.getElementById('registerPassword').value;
+                const confirmPassword = document.getElementById('confirmPassword').value;
+                
+                // Validasi
+                if (password !== confirmPassword) {
+                    showNotification('Password dan konfirmasi password tidak cocok!', false);
+                    return;
+                }
+                
+                // Periksa apakah email sudah terdaftar
+                const users = getUsers();
+                if (users.some(user => user.email === email)) {
+                    showNotification('Email sudah terdaftar!', false);
+                    return;
+                }
+                
+                // Tambahkan user baru
+                const newUser = {
+                    firstName,
+                    lastName,
+                    email,
+                    phone,
+                    password // Dalam aplikasi nyata, password harus di-hash
+                };
+                
+                users.push(newUser);
+                saveUsers(users);
+                
+                showNotification('Registrasi berhasil! Silakan login.');
+                
+                // Switch ke tab login
+                document.querySelector('[data-tab="login"]').click();
+                form.reset();
+            });
+        }
+
+        // Fungsi untuk menangani login
+        function setupLoginForm() {
+            const form = document.getElementById('loginForm');
+            
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const email = document.getElementById('loginEmail').value;
+                const password = document.getElementById('loginPassword').value;
+                
+                // Cari user
+                const users = getUsers();
+                const user = users.find(u => u.email === email && u.password === password);
+                
+                if (user) {
+                    // Simpan user yang sedang login
+                    localStorage.setItem('currentUser', JSON.stringify(user));
+                    
+                    // Tampilkan konten utama
+                    showNotification('Login berhasil!');
+                    showMainContent(user);
+                } else {
+                    showNotification('Email atau password salah!', false);
+                }
+            });
+        }
+
+        // Fungsi untuk menampilkan konten utama setelah login
+        function showMainContent(user) {
+            document.getElementById('authContainer').classList.add('hidden');
+            document.getElementById('userInfo').classList.remove('hidden');
+            document.getElementById('mainContent').classList.remove('hidden');
+            
+            // Isi info user
+            document.getElementById('userName').textContent = `${user.firstName} ${user.lastName}`;
+            document.getElementById('userEmail').textContent = user.email;
+            
+            // Render file yang ada
+            const items = getFileItems();
+            renderDownloadItems(items);
+        }
+
+        // Fungsi untuk menangani logout
+        function setupLogout() {
+            document.getElementById('logoutButton').addEventListener('click', () => {
+                localStorage.removeItem('currentUser');
+                
+                document.getElementById('authContainer').classList.remove('hidden');
+                document.getElementById('userInfo').classList.add('hidden');
+                document.getElementById('mainContent').classList.add('hidden');
+                
+                showNotification('Anda telah logout.');
+            });
+        }
+
+        // Inisialisasi data contoh jika belum ada
+        function initSampleData() {
+            const items = getFileItems();
+            if (items.length === 0) {
+                const sampleItems = [
+                    {
+                        id: 1,
+                        name: "Photo Editor Pro",
+                        description: "Aplikasi edit foto dengan efek profesional",
+                        category: "APK",
+                        size: "15.2 MB",
+                        url: "#",
+                        uploadDate: "15/08/2023",
+                        uploader: "Admin Galaxy"
+                    },
+                    {
+                        id: 2,
+                        name: "Music Player",
+                        description: "Pemutar musik dengan equalizer canggih",
+                        category: "APK",
+                        size: "8.7 MB",
+                        url: "#",
+                        uploadDate: "14/08/2023",
+                        uploader: "Admin Galaxy"
+                    },
+                    {
+                        id: 3,
+                        name: "Office Suite",
+                        description: "Aplikasi office lengkap untuk produktivitas",
+                        category: "APK",
+                        size: "45.3 MB",
+                        url: "#",
+                        uploadDate: "13/08/2023",
+                        uploader: "Admin Galaxy"
+                    }
+                ];
+                
+                saveFileItems(sampleItems);
+            }
+            
+            // Tambahkan user contoh
+            const users = getUsers();
+            if (users.length === 0) {
+                users.push({
+                    firstName: "Admin",
+                    lastName: "Galaxy",
+                    email: "admin@galaxy.com",
+                    phone: "08123456789",
+                    password: "admin123"
+                });
+                saveUsers(users);
+            }
+        }
+
+        // Periksa apakah user sudah login
+        function checkLoginStatus() {
+            const currentUser = localStorage.getItem('currentUser');
+            if (currentUser) {
+                const user = JSON.parse(currentUser);
+                showMainContent(user);
+            }
+        }
+
+        // Inisialisasi saat halaman dimuat
+        document.addEventListener('DOMContentLoaded', function() {
+            createStars();
+            initSampleData();
+            setupAuthTabs();
+            setupRegisterForm();
+            setupLoginForm();
+            setupLogout();
+            checkLoginStatus();
+            setupSearch();
+            setupUploadForm();
+        });
+    </script>
+</body>
+  </html>
